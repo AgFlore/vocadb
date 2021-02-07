@@ -139,6 +139,8 @@ namespace VocaDb.Web
 			builder.RegisterType<AspNetCoreHttpContext>().As<IHttpContext>();
 			builder.RegisterType<LoginManager>().AsSelf().As<IUserPermissionContext>();
 			builder.Register(x => new EntryAnchorFactory(AppConfig.HostAddress)).As<IEntryLinkFactory>();
+			builder.RegisterType<SmtpSettings>().AsSelf();
+			builder.Register(x => Configuration.GetSection("Smtp").Get<SmtpSettings>()).AsSelf();
 			builder.RegisterType<UserMessageMailer>().As<IUserMessageMailer>();
 			builder.RegisterType<StopForumSpamClient>().As<IStopForumSpamClient>();
 			builder.RegisterType<PVParser>().As<IPVParser>();
